@@ -19,6 +19,7 @@ public class Lab8_Tester {
     expected = "STATION Museum: pink line, in service: true, previous station: none, next station: Square";
     assertEquals(expected, s1.toString());
     expected = "STATION Square: green line, in service: true, previous station: Museum, next station: none";
+    //System.out.println("DEBUG 3: actual: " + s2.toString());
     assertEquals(expected, s2.toString());
 
     s1.addPrev(s3);
@@ -78,6 +79,7 @@ public class Lab8_Tester {
 
     s1.makeEnd();
     expected = "ENDSTATION Museum: pink line, in service: true, previous station: Square, next station: Square";
+    //System.out.println("DEBUG 4: actual: " + s1.toString());
     assertEquals(expected, s1.toString());
 
     s1 = new EndStation("pink", "Museum");
@@ -115,6 +117,7 @@ public class Lab8_Tester {
     s1.addTransferStationPrev(s2);
     String expected = "TRANSFERSTATION Museum: pink line, in service: true, previous station: none, next station: none\n\tTransfers: \n" + 
                           "\tSTATION Square: blue line, in service: true, previous station: none, next station: Museum\n";
+    //System.out.println("DEBUG 6: actual: " + s1.toString());
     assertEquals(expected, s1.toString());
 
     EndStation s3 = new EndStation("green", "Plaza");
@@ -182,6 +185,7 @@ public class Lab8_Tester {
     assertEquals(expected, next.toString());
     next = next.next;
     expected = "STATION McPherson Square: orange line, in service: true, previous station: Farragut West, next station: Metro Center";
+    //System.out.println("DEBUG 7: actual: " + next.toString());
     assertEquals(expected, next.toString());
     next = next.next;
     expected = "TRANSFERSTATION Metro Center: orange/red/purple line, in service: true, previous station: McPherson Square, next station: Federal Triangle\n" +
@@ -191,6 +195,7 @@ public class Lab8_Tester {
     expected = "STATION Federal Triangle: orange line, in service: true, previous station: Metro Center, next station: Smithsonian";
     assertEquals(expected, next.toString());
     next = next.next;
+    //System.out.println("DEBUG 5: actual: " + next.toString());
     expected = "ENDSTATION Smithsonian: orange line, in service: true, previous station: Federal Triangle, next station: Federal Triangle";
     assertEquals(expected, next.toString());
   }
@@ -210,6 +215,7 @@ public class Lab8_Tester {
     assertEquals(expected, next.toString());
     next = next.next;
     expected = "STATION Farragut North: red line, in service: true, previous station: Dupont Circle, next station: Metro Center";
+    ///System.out.println("DEBUG 8: actual: " + next.toString());
     assertEquals(expected, next.toString());
     next = next.next;
     expected = "TRANSFERSTATION Metro Center: orange/red/purple line, in service: true, previous station: McPherson Square, next station: Federal Triangle\n" +
@@ -234,6 +240,8 @@ public class Lab8_Tester {
     EndStation purple = MetroSimulator.makePurpleLine();
 
     String expected = "ENDSTATION S1: purple line, in service: true, previous station: S2, next station: S2";
+    //System.out.println("DEBUG 1: expected: " expected + "\n");
+    //System.out.println("DEBUG 1: actual : " + purple.toString() + "\n");
     assertEquals(expected, purple.toString());
 
     Station next = purple.next;
@@ -248,6 +256,7 @@ public class Lab8_Tester {
                     "\tSTATION Gallery Place: red line, in service: true, previous station: Metro Center, next station: Judiciary Square\n" +
                     "\tSTATION S3: purple line, in service: true, previous station: S2, next station: Metro Center\n" +
                     "\tSTATION S4: purple line, in service: true, previous station: Metro Center, next station: S5\n";
+    //System.out.println("DEBUG 2: actual: " + next.toString());
     assertEquals(expected, next.toString());
     next = ((TransferStation) next).otherStations.get(3);
     expected = "STATION S4: purple line, in service: true, previous station: Metro Center, next station: S5";
@@ -292,7 +301,7 @@ public class Lab8_Tester {
     transfer.addTransferStationNext(s4);
     s1.makeEnd();
     s4.makeEnd();
-
+    //System.out.println("DEBUG 9: transfer station: " + transfer.toString());
     EndStation b1 = new EndStation("blue", "B1");
     Station b2 = new Station("blue", "B2");
     Station b3 = new Station("blue", "B3");
@@ -300,14 +309,14 @@ public class Lab8_Tester {
     EndStation b5 = new EndStation("blue", "B5");
     b1.connect(b2);
     b2.connect(b3);
-    transfer.addTransferStationPrev(b3);
-    transfer.connect(b4);
+    transfer.addTransferStationPrev(b3); 
+    transfer.connect(b4); //System.out.println("DEBUG 10: " + s4.toString());
     b4.connect(b5);
     b1.makeEnd();
     b5.makeEnd();
 
-    assertEquals(4, s1.tripLength(s4));
-    assertEquals(4, s1.tripLength(b3));
+    assertEquals(4, s1.tripLength(s4)); //System.out.println("\n DEBUG 11: Starting s1->b3");
+    assertEquals(4, s1.tripLength(b3)); //System.out.println("DEBUG 12: starting s1->b4 \n");
     assertEquals(4, s1.tripLength(b4));
     assertEquals(5, s1.tripLength(b5));
     assertEquals(5, b1.tripLength(b5));
